@@ -12,7 +12,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0.9rem 4%;
-    box-shadow: 0 10px 20px red;
+    box-shadow: 0 5px 10px rgb(163, 9, 9);
     
 
 }
@@ -50,11 +50,28 @@ body {
              border-radius: 46px;
         }
 
+         .button3 {
+            
+            background-color: white; 
+            color:#2563eb;
+            
+            font-weight: 600;
+            padding: 12px 24px;
+             border: solid; 
+             border-radius: 46px;
+         }
+
         .button:hover {
            background-color: #FFFFFF;
             color: #2563eb;
             padding: 12px 24px;
 
+        }
+
+        .button3:hover {
+           background-color:#2563eb;
+            color:  #FFFFFF;
+            padding: 12px 24px;
         }
          .button2 {
             
@@ -123,16 +140,29 @@ grid-template-columns: 1fr 1fr;
 }
 .about-card {
   background-color: #90aceb; 
-  color: black;
+  color:white;
   font-weight: 1000;
   border-radius: 14px;
   padding: 1.8rem;
   box-shadow: 0 6px 20px rgba(19, 26, 40, 0.06);
 }
 
+.about-card-thumb {
+  height: 50px;
+  background-color: #0693c2;
+  padding: 0.5rem;
+  border: solid #0693c2;
+  border-radius: 15px;
+  
+}
+
+
+
+
+
 /* Card heading */
 .about-card h3 {
-  color: blue;
+
   margin-bottom: 0.8rem;
 }
 
@@ -201,6 +231,63 @@ grid-template-columns: 1fr 1fr;
 }
 
 
+
+footer { 
+  padding: 0.5rem;
+  background-color: #1d4ed8;
+  color: white;
+}
+
+.project {
+  padding: 4rem 5%;
+  background-color: red;
+}
+.project-body { 
+  padding: 0.7rem;
+}
+
+.grid { 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background-color: white;
+  border: 1px solid #1d4ed8;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px #1d4ed8;
+  transition: trabsform 0.3s ease box-shadow 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px #1d4ed8;
+}
+.project-thumb {
+  height: 170px;
+}
+.thumb-pos { 
+  
+  background:linear-gradient( 135deg, #1d4ed8 0%)
+}
+
+.project-tags { 
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.project-tags span { 
+  background-color: #0f766d;
+  color: #FAF7F2;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+}
+
 /* ===== 11. Mobile responsive rules ===== */
 
 /* Tablets and smaller: shrink the hero and stack cards */
@@ -264,16 +351,13 @@ grid-template-columns: 1fr 1fr;
 
   /* Project grid becomes a single column */
   .project-grid {
-    grid-template-columns: 1fr;
+   display: grid;
+grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
   }
+
 }
-footer { 
-  padding: 0.5rem;
-  background-color: #1d4ed8;
-}
-
-
-
-
 
 

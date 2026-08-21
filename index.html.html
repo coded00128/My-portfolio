@@ -31,8 +31,8 @@
  <h1>Coded Lifestyle</h1>
  <p><span>I am a passionate web developer with
 experience in creating modern, responsive websites. </span></p>
- <button class="button"><a href="#projects">View My Work</a></button> 
- <button class="button2">
+ <button class="button3"><a href="#projects">View My Work</a></button> 
+ <button class="button2" style="font-weight: 600;">
     <a href="https://wa.me/+2349161330967">Get in Touch</a></button>
     
      <div class="portrait">
@@ -53,8 +53,10 @@ experience in creating modern, responsive websites. </span></p>
      <div class="about-grid">
       <div class="about-card">
 
-
-        <h3>my story</h3>
+         <div class="about-card-thumb">
+        <h3>MY STORY</h3>
+         </div>
+      
         
         <p>I started coding out of curiosity and in passion to creating apps related to my course of study.
           I quickly fell in love with turning ideas into reality, building, and improving-one project at a time.
@@ -65,7 +67,11 @@ experience in creating modern, responsive websites. </span></p>
 
      <div class="about-card">
       <div class="facts">
-      <h3>quick facts</h3>
+   
+    <div class="about-card-thumb">
+      <h3>QUICK FACTS</h3>
+    </div>
+    
       <p><li>NAME: Peter Adeyeye</li>
       <li>course of study: Quantity Survey</li>
       <li>Focus: Python/HTML/CSS</li>
@@ -126,41 +132,97 @@ experience in creating modern, responsive websites. </span></p>
 
      </section>
       <br><br><br>
-      <section id="projects">
-      <h1>MyProjects</h1>
+      <section id="projects" class="projects">
+       <div class="section-head">
+        
+        
+      <h1>My Projects</h1>
+
+       </div>
+
       <br>
-      <div class="about-grid">
-      <div class="about-card">
+
+      <section class="grid">
+
+      <article class="project-card">
+
+        <div class="project-thumb thumb-pos"></div>
+
+      <div class="project-body">
+      
         <h3>My pos & inventory System</h3>
         <p>A system for managing ptoducts,stock levels,and low-stock alerts</p>
-        <p>HTML CSS JavaScript</p>
-        <button class="button">
+         <br>
+        <div class="project-tags">      
+          
+          <span>HTML</span>
+          <span>JavaScript</span>
+        </div> 
+           <br>
+          <button class="button">
           <a href="https://business-inventory-pddo.vercel.app/"> Live Demo </a>
         </button>
-      </div>
-      <div class="about-card">
-        <h3>services website </h3>
+
+        </div> 
+      
+      
+      </article>
+
+      
+      <article class="project-card">
+
+        <div class="project-thumb thumb-pos"></div>
+
+        <div class="project-body">
+
+        <h3>services website </h3
+          >
         <p>Built a website for Coded lifestyle Digital Solutions.<br>
           <span>A company aiming for tech solutins</span>
-          <p>HTML CSS UI/UX Design</p>
+          <br><br>
+          <div class="project-tags">
+          <span>HTML</span>
+          <span>CSS</span> 
+          <span> UI/UX Design</span>
+          </div>
+          <br>
           <button class="button2">
             <a href="https://coded-lifestyle-5hkt.vercel.app">View Page</a>
           </button>
         </p>
       </div>
-     </div>
+     
+      </article>
+      </section>
+  
      </section>
      <br><br><br>
      <section id="contact">
       <div class="about-card">
-        <h3>Contact Us</h3>
-        <button class="button"> <a href="https://wa.me/+2349161330967">Contact Us</a><br><br>
-    <a href="tel:+2349161330967">Call Us now</a><br><br>
-    <a href="mailto:iyiolapeter258@gmail.com">Email Us</a>
+        <h2 style="color:black">Contact Us</h2>
+        <p>we'd love to hear from you👍</p>
+         <br>
+
+           <form action="https://formspree.io/f/mdenwokz" method="POST">
+
+    
+        <label>Name:</label>
+        <input type="text" name="name" placeholder="Enter your full name"><br><br>
+        <label>Email:</label>
+        <input type="email" name="email"  placeholder="Enter your email"><br><br>
+        <label>Phone:</label>
+        <input type="tel" name="phone"  placeholder="Enter your phone number"><br><br>
+        <label>Message:</label>
+        <input type="text"placeholder="Enter your message"><br><br>
+ 
+        <button class="button" type="submit">Submit</button>
+    </form>
+    <br><br>
+
+        <button class="button"> <a href="https://wa.me/+2349161330967">Contact Us</a>
 
         </button>
       </div>
-     </section>
      <br><br>
      <section id="hire">
       <h2>Hire Me</h2>
