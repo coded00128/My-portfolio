@@ -1,5 +1,7 @@
 /* SITE HEADER */
-
+body {
+  background-color: whitesmoke;
+}
 .site-header {
     position: sticky;
     top: 0;
