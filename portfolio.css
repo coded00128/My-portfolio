@@ -378,4 +378,8 @@ body {
     background: linear-gradient(135deg, #1d2671, #c33764);
 }
 
+.project-image-five {
+    background: linear-gradient(135deg, #1a5276, #48c9b0);
+}
+
 /* ...existing code... */
