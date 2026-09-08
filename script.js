@@ -331,6 +331,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     entry.target.classList.add("visible");
 
+                    if (entry.target.classList.contains("skill-card")) {
+
+                        const progressSpan =
+                            entry.target.querySelector(
+                                ".skill-progress span"
+                            );
+
+                        if (
+                            progressSpan &&
+                            progressSpan.dataset.width
+                        ) {
+                            progressSpan.style.width =
+                                progressSpan.dataset.width;
+                        }
+                    }
+
                     observer.unobserve(entry.target);
                 });
 

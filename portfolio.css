@@ -1061,9 +1061,13 @@ img {
     grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
+
+    perspective: 1200px;
 }
 
 .skill-card {
+    position: relative;
+
     padding: 30px;
 
     background: #ffffff;
@@ -1072,7 +1076,83 @@ img {
 
     border-radius: 18px;
 
-    box-shadow: 0 15px 40px rgba(17, 24, 39, 0.05);
+    box-shadow:
+        0 15px 40px rgba(17, 24, 39, 0.05),
+        0 8px 0 rgba(139, 92, 246, 0.06);
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform 0.45s cubic-bezier(0.23, 1, 0.33, 1),
+        box-shadow 0.45s ease,
+        border-color 0.45s ease;
+
+    will-change: transform, box-shadow;
+
+    animation: skillFloat 7s ease-in-out infinite;
+}
+
+@keyframes skillFloat {
+    0%,
+    100% {
+        transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+    }
+
+    25% {
+        transform: translateZ(10px) rotateX(3deg) rotateY(-3deg);
+    }
+
+    50% {
+        transform: translateZ(20px) rotateX(0deg) rotateY(0deg) scale(1.02);
+    }
+
+    75% {
+        transform: translateZ(10px) rotateX(-3deg) rotateY(3deg);
+    }
+}
+
+.skill-card.reveal:not(.visible) {
+    animation: none;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px) rotateX(12deg) rotateY(-12deg) scale(1.04) !important;
+
+    box-shadow:
+        0 35px 70px rgba(139, 92, 246, 0.3),
+        0 12px 0 rgba(139, 92, 246, 0.1);
+
+    border-color: rgba(139, 92, 246, 0.25);
+}
+
+.skill-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -3px;
+
+    border-radius: 20px;
+
+    opacity: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark),
+            var(--primary-2)
+        );
+
+    filter: blur(12px);
+
+    transition: opacity 0.45s ease;
+
+    z-index: -1;
+}
+
+.skill-card:hover::before {
+    opacity: 0.55;
 }
 
 .skill-icon {
@@ -1087,11 +1167,84 @@ img {
 
     border-radius: 12px;
 
-    background: rgba(139, 92, 246, 0.1);
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            rgba(139, 92, 246, 0.35),
+            transparent 55%
+        ),
+        rgba(139, 92, 246, 0.1);
 
     color: var(--primary);
 
     font-size: 22px;
+
+    transform-style: preserve-3d;
+
+    box-shadow:
+        0 0 25px rgba(139, 92, 246, 0.25),
+        inset 0 0 15px rgba(139, 92, 246, 0.15);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+
+    animation: skillIconGlow 5s ease-in-out infinite;
+
+    will-change: transform, box-shadow;
+}
+
+@keyframes skillIconGlow {
+    0%,
+    100% {
+        box-shadow:
+            0 0 25px rgba(139, 92, 246, 0.25),
+            inset 0 0 15px rgba(139, 92, 246, 0.15);
+
+        filter: brightness(1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 40px rgba(139, 92, 246, 0.45),
+            inset 0 0 25px rgba(139, 92, 246, 0.3);
+
+        filter: brightness(1.15);
+    }
+}
+
+.skill-card:hover .skill-icon {
+    animation: skillIconSpin 0.8s cubic-bezier(0.25, 0.4, 0.4, 1.4) forwards;
+
+    box-shadow:
+        0 0 45px rgba(139, 92, 246, 0.55),
+        inset 0 0 30px rgba(139, 92, 246, 0.4);
+}
+
+@keyframes skillIconSpin {
+    0% {
+        transform: scale(1) rotateX(0deg) rotateY(0deg);
+    }
+
+    20% {
+        transform: scale(1.2) rotateY(180deg) rotateX(15deg);
+    }
+
+    40% {
+        transform: scale(1.3) rotateY(360deg) rotateX(25deg);
+    }
+
+    60% {
+        transform: scale(1.25) rotateY(540deg) rotateX(15deg);
+    }
+
+    80% {
+        transform: scale(1.15) rotateY(720deg) rotateX(5deg);
+    }
+
+    100% {
+        transform: scale(1.1) rotateY(720deg) rotateX(0deg);
+    }
 }
 
 .skill-card h3 {
@@ -1101,17 +1254,25 @@ img {
 }
 
 .skill-progress {
-    height: 5px;
+    height: 8px;
 
     overflow: hidden;
 
     background: #e7e9ef;
 
     border-radius: 10px;
+
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.08),
+        0 2px 4px rgba(17, 24, 39, 0.04);
 }
 
 .skill-progress span {
+    position: relative;
+
     display: block;
+
+    width: 0;
 
     height: 100%;
 
@@ -1122,6 +1283,45 @@ img {
         var(--primary-dark),
         var(--primary-2)
     );
+
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+
+    transform: translateZ(4px);
+
+    transition: width 1.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    will-change: width;
+}
+
+.skill-progress span::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.5),
+            transparent
+        );
+
+    animation: skillShimmer 1.8s infinite;
+}
+
+@keyframes skillShimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(200%);
+    }
 }
 
 
