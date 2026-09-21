@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Coded Lifestyle - Digital solutions, web applications and software projects.">
-    <meta name="theme-color" content="#070b16">
+    <meta name="description" content="Coded Lifestyle - Websites, applications and interfaces built to solve real problems.">
+    <meta name="theme-color" content="#05070B">
 
-    <title>Coded Lifestyle | Digital Builder</title>
+    <title>Coded Lifestyle | I Build Digital Experiences</title>
 
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="apple-touch-icon" href="assets/images/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=Syne:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -21,47 +34,52 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
-    <link rel="stylesheet" href="portfolio.css">
+   <link rel="stylesheet" href="portfolio.css">
+
+    <noscript>
+        <style>
+            .portfolio-lock { display: none !important; }
+            body.portfolio-locked { overflow: auto; }
+            .hero-anim { opacity: 1 !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
 </head>
 
 <body class="portfolio-locked">
 
-    <!-- LOCK SCREEN -->
-    <div id="portfolioLock" class="portfolio-lock" aria-hidden="false">
-        <div class="lock-background">
+    <!-- CINEMATIC INTRO -->
+    <div id="portfolioLock" class="portfolio-lock cinematic-intro" aria-hidden="false" role="dialog" aria-label="Coded Lifestyle intro">
+        <div class="lock-background" aria-hidden="true">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
         </div>
 
-        <div class="lock-panel">
-            <div class="coded-logo" aria-label="Coded Lifestyle logo">
+        <div class="lock-panel intro-panel">
+            <div class="coded-logo intro-logo" aria-label="Coded Lifestyle logo">
                 <span>C</span>
                 <span>L</span>
             </div>
 
-            <div class="lock-brand">CODED LIFESTYLE</div>
+            <div class="lock-brand intro-brand">CODED LIFESTYLE</div>
+            <div class="intro-tagline">DIGITAL EXPERIENCES</div>
 
-            <h1>Digital Builder</h1>
-
-            <p>
-                Explore projects, products and digital solutions built by Coded.
-            </p>
+            <div class="intro-load-row">
+                <div class="intro-progress" role="progressbar" aria-label="Loading portfolio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="introProgress">
+                    <span id="introProgressBar"></span>
+                </div>
+                <span class="intro-percent" id="introPercent">0%</span>
+            </div>
 
             <button
                 id="unlockButton"
-                class="btn btn-primary unlock-button"
+                class="intro-skip"
                 type="button"
             >
-                Enter Portfolio
+                Tap anywhere to enter
             </button>
-
-            <div class="lock-instruction">
-                <span>Swipe left</span>
-                <span class="instruction-divider">or</span>
-                <span>press Enter</span>
-            </div>
         </div>
     </div>
 
@@ -98,9 +116,8 @@
 
                 <button
                     class="navbar-toggler"
+                    id="navToggle"
                     type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#mainNav"
                     aria-controls="mainNav"
                     aria-expanded="false"
                     aria-label="Toggle navigation"
@@ -125,19 +142,15 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="#work">Projects</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#work">Work</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skills">Skills</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#github">GitHub</a>
                     </li>
 
                     <li class="nav-item">
@@ -146,7 +159,7 @@
 
                     <li class="nav-item ms-lg-3">
                         <a class="btn btn-primary nav-hire" href="#hire">
-                            Hire Me
+                            Let's Work
                         </a>
                     </li>
 
@@ -167,42 +180,38 @@
 
                     <div class="col-lg-7">
 
-                        <div class="hero-content reveal">
-                            <span class="hero-eyebrow">
-                                HELLO, I'M CODED
+                        <div class="hero-content">
+                            <span class="hero-eyebrow hero-anim">
+                                CODED LIFESTYLE — DEVELOPER
                             </span>
 
-                            <h1>
-                                Building digital
-                                <span>solutions</span>
-                                that work.
+                            <h1 class="hero-anim hero-anim-1">
+                                I BUILD DIGITAL
+                                <span>EXPERIENCES.</span>
                             </h1>
 
-                            <p>
-                                I design and build practical digital products,
-                                responsive websites and software solutions
-                                focused on real-world problems.
+                            <p class="hero-anim hero-anim-2">
+                                Websites, applications and interfaces built
+                                to solve real problems.
                             </p>
 
-                            <div class="hero-buttons">
+                            <div class="hero-buttons hero-anim hero-anim-3">
 
                                 <a href="#work" class="btn btn-primary btn-lg">
-                                    Explore My Work
+                                    View Projects
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
 
                                 <a
-                                    href="https://wa.me/2349161330967"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    href="#contact"
                                     class="btn btn-outline-light btn-lg"
                                 >
-                                    Let's Talk
+                                    Let's Work
                                 </a>
 
                             </div>
 
-                            <div class="hero-socials">
+                            <div class="hero-socials hero-anim hero-anim-5">
 
                                 <a
                                     href="https://github.com/coded00128"
@@ -246,7 +255,7 @@
 
                     <div class="col-lg-5">
 
-                        <div class="hero-visual reveal">
+                        <div class="hero-visual hero-anim hero-anim-4">
 
                             <div class="profile-orbit">
                                 <div class="orbit orbit-one"></div>
@@ -286,7 +295,7 @@
                 <div class="stats-grid">
 
                     <div class="stat-item">
-                        <strong>05+</strong>
+                        <strong>08+</strong>
                         <span>Projects Shipped</span>
                     </div>
 
@@ -311,13 +320,605 @@
         </section>
 
 
+        <!-- PROJECTS -->
+        <section class="section section-dark" id="work">
+
+            <div class="container">
+
+                <div class="section-heading d-flex justify-content-between align-items-end flex-wrap gap-4 reveal">
+
+                    <div>
+                        <span>01 / FEATURED PROJECTS</span>
+                        <h2>Projects built to solve problems.</h2>
+                    </div>
+
+                    <div class="project-filters">
+                        <button class="filter-btn active" data-filter="all">
+                            All
+                        </button>
+
+                        <button class="filter-btn" data-filter="web">
+                            Web
+                        </button>
+
+                        <button class="filter-btn" data-filter="business">
+                            Business
+                        </button>
+
+                        <button class="filter-btn" data-filter="software">
+                            Software
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="projects-grid featured-grid">
+
+                    <!-- 01 / LARGE FEATURED -->
+                    <article
+                        class="project-card project-featured reveal"
+                        data-category="software business"
+                    >
+                        <div class="project-media project-icon-media project-featured-media">
+                            <i class="bi bi-rulers"></i>
+                            <span class="project-number">01</span>
+                            <span class="project-featured-badge">Featured</span>
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://qs-estimator-web.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open QS Estimator"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="project-info">
+                            <span>Software / Quantity Surveying</span>
+                            <h3>QS Estimator</h3>
+                            <p>
+                                A quantity surveying tool for taking off,
+                                estimating and project costing workflows.
+                            </p>
+                            <div class="project-tags">
+                                <span>JavaScript</span>
+                                <span>Estimation</span>
+                                <span>Responsive</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://qs-estimator-web.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <!-- 02 / LARGE FEATURED -->
+                    <article
+                        class="project-card project-featured reveal"
+                        data-category="web business"
+                    >
+                        <div class="project-media project-icon-media project-featured-media project-construction-media">
+                            <i class="bi bi-building-check"></i>
+                            <span class="project-number">02</span>
+                            <span class="project-featured-badge">Featured</span>
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://construction-project-web.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Construction Website"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="project-info">
+                            <span>Construction / Real Estate</span>
+                            <h3>Construction Website</h3>
+                            <p>
+                                A modern construction and real-estate website designed
+                                to showcase properties, construction services,
+                                infrastructure projects and development solutions.
+                            </p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>Responsive</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://construction-project-web.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <!-- 03 / LARGE FEATURED -->
+                    <article
+                        class="project-card project-featured reveal"
+                        data-category="web business"
+                    >
+                        <div class="project-media project-icon-media project-featured-media project-zaren-media">
+                            <i class="bi bi-gem"></i>
+                            <span class="project-number">03</span>
+                            <span class="project-featured-badge">Featured</span>
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://zarene-8px1.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Zarén Elixir"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="project-info">
+                            <span>E-commerce / Fragrance</span>
+                            <h3>Zarén Elixir</h3>
+                            <p>
+                                A premium fragrance e-commerce website with product
+                                discovery, collections, shopping interactions and
+                                WhatsApp-based ordering.
+                            </p>
+                            <div class="project-tags">
+                                <span>E-commerce</span>
+                                <span>JavaScript</span>
+                                <span>WhatsApp Ordering</span>
+                                <span>Responsive</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://zarene-8px1.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <!-- 04 / SECONDARY -->
+                    <article
+                        class="project-card reveal"
+                        data-category="business web"
+                    >
+                        <div class="project-media">
+                            <span class="project-number project-number-small">04</span>
+
+                            <img
+                                src="assets/images/webdesign.jpg"
+                                alt="POS and Inventory System dashboard preview"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://business-inventory-pddo.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open POS and Inventory System"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+                            <span>Business / Web</span>
+                            <h3>POS & Inventory System</h3>
+                            <p>
+                                A practical inventory management system for
+                                small businesses.
+                            </p>
+                            <div class="project-tags">
+                                <span>JavaScript</span>
+                                <span>Business</span>
+                                <span>Inventory</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://business-inventory-pddo.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <!-- 05 / SECONDARY -->
+                    <article
+                        class="project-card reveal"
+                        data-category="web business"
+                    >
+                        <div class="project-media">
+                            <span class="project-number project-number-small">05</span>
+
+                            <img
+                                src="assets/images/royal-stay.jpg"
+                                alt="Royal Stay Hotel and Resort website preview"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://royal-stay-guest-hotel-and-resorts.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Royal Stay Hotel and Resort"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+                            <span>Web / Hospitality</span>
+                            <h3>Royal Stay Hotel & Resort</h3>
+                            <p>
+                                A luxury hotel booking website with room
+                                previews, amenities showcase and offers.
+                            </p>
+                            <div class="project-tags">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>Booking UI</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://royal-stay-guest-hotel-and-resorts.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <!-- 06 / SECONDARY -->
+                    <article
+                        class="project-card reveal"
+                        data-category="web"
+                    >
+                        <div class="project-media">
+                            <span class="project-number project-number-small">06</span>
+
+                            <img
+                                src="assets/images/primeland.jpeg"
+                                alt="PrimeLand Real Estate website preview"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://prime-land-bnev.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open PrimeLand Real Estate"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+                            <span>Web / Real Estate</span>
+                            <h3>PrimeLand Real Estate</h3>
+                            <p>
+                                A modern real estate platform for property,
+                                construction and development services.
+                            </p>
+                            <div class="project-tags">
+                                <span>Real Estate</span>
+                                <span>Responsive</span>
+                                <span>Web</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://prime-land-bnev.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article
+                        class="project-card reveal"
+                        data-category="web"
+                    >
+                        <div class="project-media">
+
+                            <img
+                                src="assets/images/coded-lifestyle-bg.jpg"
+                                alt="Coded Lifestyle company website preview"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://codedlifestyle.name.ng"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Coded Lifestyle"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+                            <span>Web / Company</span>
+                            <h3>Coded Lifestyle</h3>
+                            <p>
+                                The official Coded Lifestyle company website —
+                                digital solutions, products and services.
+                            </p>
+                            <div class="project-tags">
+                                <span>Brand</span>
+                                <span>Web</span>
+                                <span>Responsive</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://codedlifestyle.name.ng"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article
+                        class="project-card reveal"
+                        data-category="web"
+                    >
+                        <div class="project-media project-icon-media">
+                            <i class="bi bi-mortarboard"></i>
+
+                            <div class="project-overlay">
+                                <a
+                                    href="https://bright-future-academy-rust.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Open Bright Future Academy"
+                                >
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="project-info">
+                            <span>Web / Education</span>
+                            <h3>Bright Future Academy</h3>
+                            <p>
+                                A responsive educational website built around
+                                a clean school experience.
+                            </p>
+                            <div class="project-tags">
+                                <span>Education</span>
+                                <span>Responsive</span>
+                                <span>Web</span>
+                            </div>
+                            <div class="project-actions">
+                                <a
+                                    href="https://bright-future-academy-rust.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="project-live-btn"
+                                >
+                                    View Live Project
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                 </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVICES -->
+        <section class="section section-dark" id="services">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+                    <span>02 / SERVICES</span>
+                    <h2>What I can build for you.</h2>
+                </div>
+
+                <div class="services-grid">
+
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>
+                            Responsive websites and web applications
+                            designed for modern businesses.
+                        </p>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h3>App Development</h3>
+                        <p>
+                            Practical mobile applications focused on
+                            real-world problems.
+                        </p>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h3>UI/UX</h3>
+                        <p>
+                            Clean, intuitive interfaces designed around
+                            usability and user experience.
+                        </p>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="bi bi-bag"></i>
+                        </div>
+                        <h3>E-commerce</h3>
+                        <p>
+                            Online stores with product browsing, ordering
+                            and useful business functionality.
+                        </p>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <h3>SEO &amp; Performance</h3>
+                        <p>
+                            Fast, responsive and search-friendly websites
+                            that load quickly on any device.
+                        </p>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="bi bi-rulers"></i>
+                        </div>
+                        <h3>QS &amp; Estimation Tools</h3>
+                        <p>
+                            Practical quantity surveying tools for taking
+                            off, estimating and project costing.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUANTITY SURVEYING + TECHNOLOGY -->
+        <section class="section section-dark" id="qs-tech">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+                    <span>03 / QS + TECHNOLOGY</span>
+                    <h2>Technology meets quantity surveying.</h2>
+                </div>
+
+                <div class="qs-card reveal">
+
+                    <div>
+                        <p class="large-copy">
+                            My background in Quantity Surveying influences
+                            the way I approach software development —
+                            combining technical thinking with practical
+                            problem solving.
+                        </p>
+
+                        <p>
+                            The QS Estimator is a working example: a
+                            quantity surveying tool for taking off,
+                            estimating and project costing workflows,
+                            designed around how surveyors actually work.
+                        </p>
+
+                        <div class="project-actions">
+                            <a
+                                href="https://qs-estimator-web.vercel.app"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="project-live-btn"
+                            >
+                                View QS Estimator
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="qs-visual" aria-hidden="true">
+                        <i class="bi bi-rulers"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
         <!-- ABOUT -->
         <section class="section section-dark" id="about">
 
             <div class="container">
 
                 <div class="section-heading reveal">
-                    <span>01 / ABOUT</span>
+                    <span>04 / ABOUT</span>
                     <h2>Turning ideas into useful products.</h2>
                 </div>
 
@@ -325,11 +926,13 @@
 
                     <div class="col-lg-6 reveal">
                         <p class="large-copy">
-                            Coded Lifestyle is focused on building digital
-                            solutions that solve practical problems.
+                            I'm Coded — a developer building with
+                            Coded Lifestyle and Ridev Technologies.
                         </p>
 
                         <p>
+                            I work across web development, app development
+                            and UI/UX, focused on practical problem solving.
                             From business inventory systems to educational
                             platforms, real estate websites and quantity
                             surveying tools, every project is designed around
@@ -362,320 +965,106 @@
         </section>
 
 
-        <!-- SKILLS -->
+        <!-- TECH STACK -->
         <section class="section section-light" id="skills">
 
             <div class="container">
 
                 <div class="section-heading reveal">
-                    <span>02 / SKILLS</span>
+                    <span>05 / TECH STACK</span>
                     <h2>Tools I use to build.</h2>
                 </div>
 
-                 <div class="skills-grid">
+                  <div class="skills-grid">
 
-                     <div class="skill-card reveal">
-                         <div class="skill-icon">
-                             <i class="bi bi-filetype-html"></i>
-                         </div>
-                         <h3>HTML</h3>
-                         <div class="skill-progress">
-                             <span data-width="95%"></span>
-                         </div>
-                     </div>
+                      <div class="skill-card reveal">
+                          <div class="skill-icon">
+                              <i class="bi bi-filetype-html"></i>
+                          </div>
+                          <div class="skill-header">
+                              <h3>HTML</h3>
+                              <span class="skill-percent" data-target="95">0%</span>
+                          </div>
+                          <div class="skill-progress">
+                              <span data-width="95%"></span>
+                          </div>
+                      </div>
 
-                     <div class="skill-card reveal">
-                         <div class="skill-icon">
-                             <i class="bi bi-filetype-css"></i>
-                         </div>
-                         <h3>CSS</h3>
-                         <div class="skill-progress">
-                             <span data-width="92%"></span>
-                         </div>
-                     </div>
+                      <div class="skill-card reveal">
+                          <div class="skill-icon">
+                              <i class="bi bi-filetype-css"></i>
+                          </div>
+                          <div class="skill-header">
+                              <h3>CSS</h3>
+                              <span class="skill-percent" data-target="92">0%</span>
+                          </div>
+                          <div class="skill-progress">
+                              <span data-width="92%"></span>
+                          </div>
+                      </div>
 
-                     <div class="skill-card reveal">
-                         <div class="skill-icon">
-                             <i class="bi bi-filetype-js"></i>
-                         </div>
-                         <h3>JavaScript</h3>
-                         <div class="skill-progress">
-                             <span data-width="85%"></span>
-                         </div>
-                     </div>
+                      <div class="skill-card reveal">
+                          <div class="skill-icon">
+                              <i class="bi bi-filetype-js"></i>
+                          </div>
+                          <div class="skill-header">
+                              <h3>JavaScript</h3>
+                              <span class="skill-percent" data-target="85">0%</span>
+                          </div>
+                          <div class="skill-progress">
+                              <span data-width="85%"></span>
+                          </div>
+                      </div>
 
-                     <div class="skill-card reveal">
-                         <div class="skill-icon">
-                             <i class="bi bi-bootstrap"></i>
-                         </div>
-                         <h3>Bootstrap</h3>
-                         <div class="skill-progress">
-                             <span data-width="90%"></span>
-                         </div>
-                     </div>
+                      <div class="skill-card reveal">
+                          <div class="skill-icon">
+                              <i class="bi bi-bootstrap"></i>
+                          </div>
+                          <div class="skill-header">
+                              <h3>Bootstrap</h3>
+                              <span class="skill-percent" data-target="90">0%</span>
+                          </div>
+                          <div class="skill-progress">
+                              <span data-width="90%"></span>
+                          </div>
+                      </div>
 
-                     <div class="skill-card reveal">
-                         <div class="skill-icon">
-                             <i class="bi bi-phone"></i>
-                         </div>
-                         <h3>Flutter</h3>
-                         <div class="skill-progress">
-                             <span data-width="78%"></span>
-                         </div>
-                     </div>
+                      <div class="skill-card reveal">
+                          <div class="skill-icon">
+                              <i class="bi bi-phone"></i>
+                          </div>
+                          <div class="skill-header">
+                              <h3>Flutter</h3>
+                              <span class="skill-percent" data-target="78">0%</span>
+                          </div>
+                          <div class="skill-progress">
+                              <span data-width="78%"></span>
+                          </div>
+                      </div>
 
-                     <div class="skill-card reveal">
-                         <div class="skill-icon">
-                             <i class="bi bi-terminal"></i>
-                         </div>
-                         <h3>Python</h3>
-                         <div class="skill-progress">
-                             <span data-width="80%"></span>
-                         </div>
-                     </div>
+                      <div class="skill-card reveal">
+                          <div class="skill-icon">
+                              <i class="bi bi-terminal"></i>
+                          </div>
+                          <div class="skill-header">
+                              <h3>Python</h3>
+                              <span class="skill-percent" data-target="80">0%</span>
+                          </div>
+                          <div class="skill-progress">
+                              <span data-width="80%"></span>
+                          </div>
+                      </div>
 
-                 </div>
+                  </div>
 
-            </div>
-
-        </section>
-
-
-        <!-- PROJECTS -->
-        <section class="section section-dark" id="work">
-
-            <div class="container">
-
-                <div class="section-heading d-flex justify-content-between align-items-end flex-wrap gap-4 reveal">
-
-                    <div>
-                        <span>03 / SELECTED WORK</span>
-                        <h2>Projects built to solve problems.</h2>
-                    </div>
-
-                    <div class="project-filters">
-                        <button class="filter-btn active" data-filter="all">
-                            All
-                        </button>
-
-                        <button class="filter-btn" data-filter="web">
-                            Web
-                        </button>
-
-                        <button class="filter-btn" data-filter="business">
-                            Business
-                        </button>
-
-                        <button class="filter-btn" data-filter="software">
-                            Software
-                        </button>
-                    </div>
-
-                </div>
-
-
-                <div class="projects-grid">
-
-                    <article
-                        class="project-card reveal"
-                        data-category="business web"
-                    >
-                        <div class="project-media">
-
-                            <img
-                                src="assets/images/webdesign.jpg"
-                                alt="POS and Inventory System"
-                            >
-
-                            <div class="project-overlay">
-                                <a
-                                    href="https://business-inventory-pddo.vercel.app/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Open POS and Inventory System"
-                                >
-                                    <i class="bi bi-arrow-up-right"></i>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="project-info">
-                            <span>Business / Web</span>
-                            <h3>POS & Inventory System</h3>
-                            <p>
-                                A practical inventory management system for
-                                small businesses.
-                            </p>
-                        </div>
-                    </article>
-
-
-                    <article
-                        class="project-card reveal"
-                        data-category="web"
-                    >
-                        <div class="project-media">
-
-                            <img
-                                src="assets/images/coded-lifestyle-bg.jpg"
-                                alt="Coded Lifestyle website"
-                            >
-
-                            <div class="project-overlay">
-                                <a
-                                    href="https://coded-lifestyle-5hkt.vercel.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Open Coded Lifestyle"
-                                >
-                                    <i class="bi bi-arrow-up-right"></i>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="project-info">
-                            <span>Web / Personal Brand</span>
-                            <h3>Coded Lifestyle</h3>
-                            <p>
-                                A personal digital brand and developer
-                                portfolio experience.
-                            </p>
-                        </div>
-                    </article>
-
-
-                    <article
-                        class="project-card reveal"
-                        data-category="web"
-                    >
-                        <div class="project-media">
-
-                            <img
-                                src="assets/images/primeland.jpeg"
-                                alt="PrimeLand Real Estate"
-                            >
-
-                            <div class="project-overlay">
-                                <a
-                                    href="https://prime-land-bnev.vercel.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Open PrimeLand Real Estate"
-                                >
-                                    <i class="bi bi-arrow-up-right"></i>
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="project-info">
-                            <span>Web / Real Estate</span>
-                            <h3>PrimeLand Real Estate</h3>
-                            <p>
-                                A modern real estate platform for property,
-                                construction and development services.
-                            </p>
-                        </div>
-                    </article>
-
-
-                    <article
-                        class="project-card reveal"
-                        data-category="web"
-                    >
-                        <div class="project-media project-icon-media">
-                            <i class="bi bi-mortarboard"></i>
-
-                            <div class="project-overlay">
-                                <a
-                                    href="https://bright-future-academy-rust.vercel.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Open Bright Future Academy"
-                                >
-                                    <i class="bi bi-arrow-up-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="project-info">
-                            <span>Web / Education</span>
-                            <h3>Bright Future Academy</h3>
-                            <p>
-                                A responsive educational website built around
-                                a clean school experience.
-                            </p>
-                        </div>
-                    </article>
-
-
-                    <article
-                        class="project-card reveal"
-                        data-category="software business"
-                    >
-                        <div class="project-media project-icon-media">
-                            <i class="bi bi-rulers"></i>
-
-                            <div class="project-overlay">
-                                <a
-                                    href="https://qs-estimator-web.vercel.app"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Open QS Estimator"
-                                >
-                                    <i class="bi bi-arrow-up-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                     <div class="project-info">
-                             <span>Software / Quantity Surveying</span>
-                             <h3>QS Estimator</h3>
-                             <p>
-                                 A quantity surveying tool for taking off,
-                                 estimating and project costing workflows.
-                             </p>
-                         </div>
-                     </article>
-
-
-                     <article
-                         class="project-card reveal"
-                         data-category="web business"
-                     >
-                         <div class="project-media">
-
-                             <img
-                                 src="assets/images/royal-stay.jpg"
-                                 alt="Royal Stay Hotel and Resort"
-                             >
-
-                             <div class="project-overlay">
-                                 <a
-                                     href="https://royal-stay-guest-hotel-and-resorts.vercel.app/"
-                                     target="_blank"
-                                     rel="noopener noreferrer"
-                                     aria-label="Open Royal Stay Hotel and Resort"
-                                 >
-                                     <i class="bi bi-arrow-up-right"></i>
-                                 </a>
-                             </div>
-
-                         </div>
-
-                         <div class="project-info">
-                             <span>Web / Hospitality</span>
-                             <h3>Royal Stay Hotel & Resort</h3>
-                             <p>
-                                 A luxury hotel booking website with room
-                                 previews, amenities showcase and offers.
-                             </p>
-                         </div>
-                     </article>
-
-                 </div>
+                  <div class="stack-row reveal" aria-label="Other familiar tools">
+                      <span><i class="bi bi-wind"></i> Tailwind CSS</span>
+                      <span><i class="bi bi-filetype-php"></i> PHP</span>
+                      <span><i class="bi bi-database"></i> MySQL</span>
+                      <span><i class="bi bi-phone"></i> Kotlin</span>
+                      <span><i class="bi bi-git"></i> Git</span>
+                      <span><i class="bi bi-github"></i> GitHub</span>
+                  </div>
 
             </div>
 
@@ -721,7 +1110,7 @@
             <div class="container">
 
                 <div class="section-heading reveal">
-                    <span>04 / GITHUB</span>
+                    <span>06 / GITHUB</span>
                     <h2>Selected repositories.</h2>
                 </div>
 
@@ -742,7 +1131,7 @@
             <div class="container">
 
                 <div class="section-heading reveal">
-                    <span>05 / CONTACT</span>
+                    <span>07 / CONTACT</span>
                     <h2>Let's build something useful.</h2>
                 </div>
 
@@ -787,6 +1176,15 @@
                             >
                                 <i class="bi bi-tiktok"></i>
                                 <span>TikTok</span>
+                            </a>
+
+                            <a
+                                href="https://codedlifestyle.name.ng"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i class="bi bi-globe"></i>
+                                <span>Coded Lifestyle Company Website</span>
                             </a>
 
                         </div>
@@ -906,7 +1304,18 @@
                     </a>
 
                     <p>
-                        Building useful digital solutions.
+                        Building digital experiences.
+                    </p>
+
+                    <p>
+                        <a
+                            href="https://codedlifestyle.name.ng"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="footer-company-link"
+                        >
+                            codedlifestyle.name.ng
+                        </a>
                     </p>
                 </div>
 
@@ -937,6 +1346,22 @@
                         aria-label="WhatsApp"
                     >
                         <i class="bi bi-whatsapp"></i>
+                    </a>
+
+                    <a
+                        href="https://codedlifestyle.name.ng"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Coded Lifestyle portfolio website"
+                    >
+                        <i class="bi bi-globe"></i>
+                    </a>
+
+                    <a
+                        href="mailto:hello@codedlifestyle.dev"
+                        aria-label="Email"
+                    >
+                        <i class="bi bi-envelope"></i>
                     </a>
 
                 </div>
@@ -996,7 +1421,12 @@
 
                 <button data-command="work">
                     <i class="bi bi-grid"></i>
-                    <span>Work</span>
+                    <span>Projects</span>
+                </button>
+
+                <button data-command="services">
+                    <i class="bi bi-gear"></i>
+                    <span>Services</span>
                 </button>
 
                 <button data-command="skills">

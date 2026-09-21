@@ -3,15 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const body = document.body;
 
     /* =========================================
-       LOCK SCREEN
+       CINEMATIC INTRO (auto, first visit per session)
     ========================================= */
 
     const portfolioLock = document.getElementById("portfolioLock");
     const unlockButton = document.getElementById("unlockButton");
+    const introProgressBar =
+        document.getElementById("introProgressBar");
+    const introProgress =
+        document.getElementById("introProgress");
+    const introPercent =
+        document.getElementById("introPercent");
 
-    let lockStartX = 0;
-    let lockStartY = 0;
-    let lockPointerActive = false;
+    const prefersReducedMotion =
+        window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches;
 
     function unlockPortfolio() {
         if (!portfolioLock || portfolioLock.classList.contains("is-unlocked")) {
@@ -24,8 +30,84 @@ document.addEventListener("DOMContentLoaded", () => {
         body.classList.remove("portfolio-locked");
 
         setTimeout(() => {
-            portfolioLock.remove();
+            if (portfolioLock.parentNode) {
+                portfolioLock.remove();
+            }
         }, 800);
+    }
+
+    if (portfolioLock) {
+        /* The styled Coded Lifestyle load plays on every visit. */
+        const INTRO_DURATION = prefersReducedMotion
+            ? 400
+            : 2600;
+
+        const startTime = performance.now();
+
+        function tickProgress(now) {
+            if (
+                !portfolioLock ||
+                portfolioLock.classList.contains("is-unlocked")
+            ) {
+                return;
+            }
+
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / INTRO_DURATION, 1);
+            const value = Math.round(progress * 100);
+
+            if (introProgressBar) {
+                introProgressBar.style.width = value + "%";
+            }
+
+            if (introPercent) {
+                introPercent.textContent = value + "%";
+            }
+
+            if (introProgress) {
+                introProgress.setAttribute("aria-valuenow", value);
+            }
+
+            if (progress < 1) {
+                requestAnimationFrame(tickProgress);
+            } else {
+                unlockPortfolio();
+            }
+        }
+
+        requestAnimationFrame(tickProgress);
+
+        /*
+         * Interactive backdrop: orbit rings drift with the pointer.
+         * Tap / click anywhere to enter immediately.
+         */
+
+        portfolioLock.addEventListener("pointermove", (event) => {
+            if (prefersReducedMotion) {
+                return;
+            }
+
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            const shiftX =
+                ((event.clientX - centerX) / centerX) * -14;
+            const shiftY =
+                ((event.clientY - centerY) / centerY) * -10;
+
+            portfolioLock.style.setProperty(
+                "--shift-x",
+                shiftX.toFixed(1) + "px"
+            );
+            portfolioLock.style.setProperty(
+                "--shift-y",
+                shiftY.toFixed(1) + "px"
+            );
+        });
+
+        portfolioLock.addEventListener("click", () => {
+            unlockPortfolio();
+        });
     }
 
     if (unlockButton) {
@@ -36,106 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-     * Touch and mouse drag support.
-     * Swipe or drag from right to left.
-     */
-
-    if (portfolioLock) {
-
-        portfolioLock.addEventListener("pointerdown", (event) => {
-
-            if (event.pointerType === "mouse" && event.button !== 0) {
-                return;
-            }
-
-            lockPointerActive = true;
-
-            lockStartX = event.clientX;
-            lockStartY = event.clientY;
-
-            try {
-                portfolioLock.setPointerCapture(event.pointerId);
-            } catch (error) {
-                /* Pointer capture is not required on every browser. */
-            }
-        });
-
-        portfolioLock.addEventListener("pointerup", (event) => {
-
-            if (!lockPointerActive) {
-                return;
-            }
-
-            lockPointerActive = false;
-
-            const deltaX = event.clientX - lockStartX;
-            const deltaY = event.clientY - lockStartY;
-
-            const horizontalSwipe =
-                Math.abs(deltaX) > Math.abs(deltaY);
-
-            if (
-                horizontalSwipe &&
-                deltaX < -50
-            ) {
-                unlockPortfolio();
-            }
-        });
-
-
-        /*
-         * PC trackpad support.
-         *
-         * A horizontal trackpad swipe normally produces deltaX.
-         */
-
-        portfolioLock.addEventListener(
-            "wheel",
-            (event) => {
-
-                if (event.deltaX < -25) {
-                    event.preventDefault();
-
-                    unlockPortfolio();
-
-                    return;
-                }
-
-                /*
-                 * Shift + mouse wheel is treated as a
-                 * horizontal left gesture.
-                 */
-
-                if (
-                    event.shiftKey &&
-                    event.deltaY > 15
-                ) {
-                    event.preventDefault();
-
-                    unlockPortfolio();
-
-                    return;
-                }
-
-                /*
-                 * Normal mouse wheel fallback.
-                 * This allows PC users without a trackpad
-                 * to enter the portfolio naturally.
-                 */
-
-                if (Math.abs(event.deltaY) > 35) {
-                    event.preventDefault();
-
-                    unlockPortfolio();
-                }
-            },
-            { passive: false }
-        );
-    }
-
-
-    /*
-     * Enter key support.
+     * Enter key skips the intro.
      */
 
     window.addEventListener("keydown", (event) => {
@@ -153,22 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (
-            event.key === "ArrowLeft" &&
-            portfolioLock &&
-            !portfolioLock.classList.contains("is-unlocked")
-        ) {
-            event.preventDefault();
-
-            unlockPortfolio();
-
-            return;
-        }
-
-        if (
             event.key === "Escape" &&
             portfolioLock &&
             !portfolioLock.classList.contains("is-unlocked")
         ) {
+            unlockPortfolio();
+
             return;
         }
     });
@@ -235,36 +208,129 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       MOBILE NAVIGATION
+       MOBILE NAVIGATION (self-contained slide-in)
     ========================================= */
 
     const mainNav = document.getElementById("mainNav");
+    const navToggle = document.getElementById("navToggle");
+    const mainNavbar = document.getElementById("mainNavbar");
+
+    function isMobileNav() {
+        return window.innerWidth <= 991;
+    }
+
+    function openMobileNav() {
+        if (!mainNav) {
+            return;
+        }
+
+        mainNav.classList.add("show");
+
+        if (navToggle) {
+            navToggle.classList.add("open");
+            navToggle.setAttribute("aria-expanded", "true");
+        }
+    }
+
+    function closeMobileNav() {
+        if (!mainNav) {
+            return;
+        }
+
+        mainNav.classList.remove("show");
+
+        if (navToggle) {
+            navToggle.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+        }
+    }
+
+    if (navToggle && mainNav) {
+        navToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+
+            if (mainNav.classList.contains("show")) {
+                closeMobileNav();
+            } else {
+                openMobileNav();
+            }
+        });
+    }
 
     if (mainNav) {
 
-        const navLinks =
-            mainNav.querySelectorAll(".nav-link");
+        const menuLinks =
+            mainNav.querySelectorAll(".nav-link, .nav-hire");
 
-        navLinks.forEach((link) => {
+        menuLinks.forEach((link) => {
 
             link.addEventListener("click", () => {
 
-                if (
-                    window.innerWidth <= 991 &&
-                    mainNav.classList.contains("show")
-                ) {
-                    const collapse =
-                        bootstrap.Collapse.getInstance(mainNav) ||
-                        new bootstrap.Collapse(
-                            mainNav,
-                            { toggle: false }
-                        );
-
-                    collapse.hide();
+                if (isMobileNav()) {
+                    closeMobileNav();
                 }
             });
 
         });
+
+        document.addEventListener("click", (event) => {
+
+            if (
+                !isMobileNav() ||
+                !mainNav.classList.contains("show")
+            ) {
+                return;
+            }
+
+            if (
+                !mainNav.contains(event.target) &&
+                !(navToggle && navToggle.contains(event.target))
+            ) {
+                closeMobileNav();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+
+            if (
+                event.key === "Escape" &&
+                isMobileNav() &&
+                mainNav.classList.contains("show")
+            ) {
+                closeMobileNav();
+
+                if (navToggle) {
+                    navToggle.focus();
+                }
+            }
+        });
+
+        window.addEventListener("resize", () => {
+
+            if (!isMobileNav()) {
+                closeMobileNav();
+            }
+        });
+    }
+
+    /* Sticky navbar shadow on scroll. */
+
+    if (mainNavbar) {
+
+        function updateNavbarShadow() {
+            mainNavbar.classList.toggle(
+                "scrolled",
+                window.scrollY > 10
+            );
+        }
+
+        updateNavbarShadow();
+
+        window.addEventListener(
+            "scroll",
+            updateNavbarShadow,
+            { passive: true }
+        );
     }
 
 
@@ -342,8 +408,66 @@ document.addEventListener("DOMContentLoaded", () => {
                             progressSpan &&
                             progressSpan.dataset.width
                         ) {
-                            progressSpan.style.width =
-                                progressSpan.dataset.width;
+                            requestAnimationFrame(() => {
+                                progressSpan.style.width =
+                                    progressSpan.dataset.width;
+                            });
+                        }
+
+                        const percentLabel =
+                            entry.target.querySelector(
+                                ".skill-percent"
+                            );
+
+                        if (
+                            percentLabel &&
+                            percentLabel.dataset.target
+                        ) {
+                            const target = parseInt(
+                                percentLabel.dataset.target,
+                                10
+                            );
+
+                            if (!isNaN(target)) {
+                                const duration = 1400;
+                                const startTime =
+                                    performance.now();
+
+                                function updatePercent(now) {
+                                    const elapsed =
+                                        now - startTime;
+                                    const progress = Math.min(
+                                        elapsed / duration,
+                                        1
+                                    );
+                                    /* Ease-out for a smooth cinematic count. */
+                                    const eased =
+                                        1 -
+                                        Math.pow(
+                                            1 - progress,
+                                            3
+                                        );
+                                    const current = Math.round(
+                                        eased * target
+                                    );
+
+                                    percentLabel.textContent =
+                                        current + "%";
+
+                                    if (progress < 1) {
+                                        requestAnimationFrame(
+                                            updatePercent
+                                        );
+                                    } else {
+                                        percentLabel.textContent =
+                                            target + "%";
+                                    }
+                                }
+
+                                requestAnimationFrame(
+                                    updatePercent
+                                );
+                            }
                         }
                     }
 
@@ -681,6 +805,7 @@ document.addEventListener("DOMContentLoaded", () => {
             home: "#home",
             about: "#about",
             work: "#work",
+            services: "#services",
             skills: "#skills",
             github: "#github",
             contact: "#contact"
@@ -888,7 +1013,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             "Your message has been sent successfully.";
 
                         formMessage.style.color =
-                            "#a78bfa";
+                            "#35D6FF";
                     }
 
                 } catch (error) {
